@@ -9,13 +9,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import Grid from '@material-ui/core/Grid';
-import AssessmentIcon from '@material-ui/icons/Assessment';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import { CardActionArea, CardActions,Fab, Divider, Paper, Card } from '@material-ui/core';
 import Zoom from '@material-ui/core/Zoom';
-import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import InvertColorsIcon from '@material-ui/icons/InvertColors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles((theme) => ({
   root: {
