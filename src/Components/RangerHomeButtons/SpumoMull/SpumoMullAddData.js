@@ -23,11 +23,14 @@ import {
 
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
+createStyles({
     root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-        margin:'auto'
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+     
     },
   }),
 );
@@ -70,59 +73,73 @@ export default function SpumoMullAddData() {
                 <DialogTitle id="responsive-dialog-title">{"SpuMo Mull Erfassung"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        // FULL SCREEN ON MOBILE
+                 
                    
-                <Grid Container spacing={3}>
+              
 
-                <Paper elevation={14} style={{marginTop:'5%'}}>
-                            <Grid item xs={12} 
-                            style={{
-                                marginTop:'5%',
-                                marginBottom:'10%',
-                                height:'50%'
-                            }}>
+              
+                <div className={classes.root}>
+      <Grid container spacing={3}>
 
-                               
-                                <Typography variant="h6" className={classes.title} gutterBottom>
+        <Grid item xs={12}>
+                     <Paper className={classes.paper} elevation={7} style={{borderRadius:'25px'}}>
+                                <Typography variant="h2" className={classes.title} gutterBottom>
                                       Grunddaten
-                               </Typography>
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}
-                                    style={{marginBottom:'25%'}}
-                                >
-                             <DatePicker value={selectedDate} onChange={handleDateChange} style={{marginBottom:'15%', marginRight:'3%'}} />
-                             <TimePicker value={selectedDate} onChange={handleDateChange} />
+                                 </Typography>
+                    </Paper>
+        </Grid>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper} elevation={7}>
+                        
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}
+                            style={{marginBottom:'25%'}}
+                        >
+                    <DatePicker value={selectedDate} onChange={handleDateChange} style={{marginBottom:'5%', marginRight:'3%'}} />
+                    <TimePicker value={selectedDate} onChange={handleDateChange} />
+                    </MuiPickersUtilsProvider>
+                
+            </Paper>
+        </Grid>
+
+
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper}>
+
      
-    </MuiPickersUtilsProvider>
+        </Paper>        
+        </Grid>
+        <Grid item xs={3}>
+          <Paper className={classes.paper}>xs=3</Paper>
+        </Grid>
+        <Grid item xs={3}>
+          <Paper className={classes.paper}>xs=3</Paper>
+        </Grid>
+        <Grid item xs={3}>
+          <Paper className={classes.paper}>xs=3</Paper>
+        </Grid>
+        <Grid item xs={3}>
+          <Paper className={classes.paper}>xs=3</Paper>
+        </Grid>
+      </Grid>
+    </div>
+
+
+                           
+                               
                             
 
-                            </Grid>
-                            </Paper>
-                            <Grid item xs={12}>
-
-                                <Paper elevation={14}>
-                                    <h1>TEST BOX two</h1>
-                                </Paper>
-
-                            </Grid>
-                            <Grid item xs={12}>
-
-                                <Paper elevation={14}>
-                                    <h1>TEST BOX three</h1>
-                                </Paper>
-
-                            </Grid>
-                        
-
-                        </Grid>
+            
                      
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose} color="primary">
-                        Disagree
+                        Close
              </Button>
                     <Button onClick={handleClose} color="primary" autoFocus>
-                        Agree
+                        Submit
              </Button>
                 </DialogActions>
             </Dialog>
