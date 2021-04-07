@@ -15,6 +15,7 @@ import Zoom from '@material-ui/core/Zoom';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 import TableSpumoMull from "./tableSpumoMull";
 import SpumoMullAppBarTable from './tableAppBarSpumoMull';
+import SpumoMullAddData from './SpumoMullAddData';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -99,10 +100,7 @@ export default function SpumoModalTrigger() {
 
         <Grid item xs={12} sm={4}>
         <Tooltip placement="top" enterDelay={75} leaveDelay={150}  TransitionComponent={Zoom} arrow={true} title="Add Report">
-         <Fab   variant="extended" size="medium" color="primary" aria-label="add" fontSize="large" >
-          <PostAddIcon fontSize="large"  />
-      
-        </Fab>
+         <SpumoMullAddData/>
         </Tooltip>
         </Grid>
 
