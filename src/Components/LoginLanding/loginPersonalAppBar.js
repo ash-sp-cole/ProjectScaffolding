@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Button, Paper, Divider, FormControl, Input, InputAdornment, InputLabel, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import date from "date-and-time";
@@ -7,20 +7,9 @@ import LockIcon from '@material-ui/icons/Lock';
 import { Link } from 'react-router-dom';
 import CreateAccountModal from "../CreateAccount";
 import { connect } from 'react-redux';
-import {Form, Field} from 'react-final-form'
-import { TextField } from 'mui-rff';
-
-
-
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-const onSubmit = async values => {
-  await sleep(300)
-  window.alert(JSON.stringify(values, 0, 2))
-  
-}
-
-
+import { Form, Field } from 'react-final-form'
+import Password from "antd/lib/input/Password";
+import {handlePasswordDispatch, handleUsernameDispatch} from "../../Redux/Actions";
 
 const ordinal = require('date-and-time/plugin/ordinal');
 
@@ -46,22 +35,26 @@ const useStylesLogin = makeStyles((theme) => ({
 
 
 
-const PersonalAppBar = (props) => {
+const PersonalAppBar = (props, dispatchLoginPassword, dispatchLoginUsername) => {
 
   // Date setup for NPM
   const now = new Date();
   date.plugin(ordinal);
   let newDate = date.format(now, 'dddd, MMMM DDD YYYY');
 
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const classes = useStyles();
   const classesLogin = useStylesLogin();
-  console.log(props.usernameDummyProp, "   ", props.passwordDummyProp)
 
-  const handleFormChange = (e) => {
 
-    console.log("test rff")
+
+
+  const handleFormChange = (event) => {
+    event.preventDefault();
+    props.dispatchLoginPassword(password);
+    props.dispatchLoginUsername(email);
 
   }
 
@@ -70,106 +63,89 @@ const PersonalAppBar = (props) => {
 
   return (
 
+    <div className={classes.root}>
+      <Grid Container spacing={3}>
+        <Grid item xs={12}>
 
-    <Form
-    onSubmit={onSubmit}
-  
-    render={({ handleSubmit, values }) => (
-      <form onSubmit={handleSubmit} noValidate>
-        <TextField label="First Name" name="username" required={true} />
-        <TextField label="Password" name="password" required={true} />
-        <pre>{JSON.stringify(values)}</pre>
-      </form>
-      
-    )}
-  />
+          <Typography variant="h1" component="h3" gutterBottom>
+            Welcome
+             </Typography>
 
+          <Typography variant="h4" component="h3" gutterBottom>
+            Please Login to Continue
+             </Typography>
 
+          <Typography variant="h6" component="h2" gutterBottom>
+            {newDate}
+          </Typography>
 
-
-
-
+        </Grid>
 
 
+        <Paper elevation={14} style={{ borderRadius: '25px' }}>
+          <form onSubmit={handleFormChange}>
+            <Grid item xs={12} style={{ marginTop: '5%' }}>
+              <FormControl className={classesLogin.margin}
 
+              >
+                <InputLabel htmlFor="input-with-icon-adornment">Username</InputLabel>
+                <Input
+                  id="input-with-icon-adornment"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <AccountCircle />
+                    </InputAdornment>
+                  }
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
 
-    // <div className={classes.root}>
-    //   <Grid Container spacing={3}>
-    //     <Grid item xs={12}>
+              </FormControl>
 
-    //       <Typography variant="h1" component="h3" gutterBottom>
-    //         Welcome
-    //          </Typography>
-
-    //       <Typography variant="h4" component="h3" gutterBottom>
-    //         Please Login to Continue
-    //          </Typography>
-
-    //       <Typography variant="h6" component="h2" gutterBottom>
-    //         {newDate}
-    //       </Typography>
-
-    //     </Grid>
-
-
-    //     <Paper elevation={14} style={{ borderRadius: '25px' }}>
-    //       <Grid item xs={12} style={{ marginTop: '5%' }}>
-    //         <FormControl className={classesLogin.margin}
-              
-    //         >
-    //           <InputLabel htmlFor="input-with-icon-adornment">Username</InputLabel>
-    //           <Input
-    //             id="input-with-icon-adornment"
-    //             startAdornment={
-    //               <InputAdornment position="start">
-    //                 <AccountCircle />
-    //               </InputAdornment>
-    //             }
-    //           />
-    //         </FormControl>
-
-    //       </Grid>
+            </Grid>
 
 
 
-    //       <Grid item xs={12}>
-    //         <FormControl style={{ marginTop: '5%', marginBottom: '3%' }} onSubmit={handleFormChange}>
-    //           <InputLabel id="passwordDummy" htmlFor="input-with-icon-adornment">Password</InputLabel>
-    //           <Input
-    //             id="input-with-icon-adornment"
-    //             startAdornment={
-    //               <InputAdornment position="start">
-    //                 <LockIcon />
-    //               </InputAdornment>
-    //             }
-    //           />
+            <Grid item xs={12}>
+              <FormControl style={{ marginTop: '5%', marginBottom: '3%' }} onSubmit={handleFormChange}>
+                <InputLabel id="passwordDummy" htmlFor="input-with-icon-adornment">Password</InputLabel>
+                <Input
+                  id="input-with-icon-adornment"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon />
+                    </InputAdornment>
+                  }
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
 
-    //           <Grid item xs={12} >
-    //             <Button variant="contained" color="primary" style={{ marginBottom: '1%', marginTop:'10%' }}
-    //              onClick={handleFormChange}
-    //             >
-    //               Login
-    //               </Button>
-    //           </Grid>
-    //         </FormControl>
-    //       </Grid>
+                <Grid item xs={12} >
+                  <Button variant="contained" color="primary" style={{ marginBottom: '1%', marginTop: '10%' }}
+                    type="submit" value="Submit"
+                  >
+                    Login
+                  </Button>
+                </Grid>
+              </FormControl>
+            </Grid>
+          </form>
 
 
 
 
+          <Grid item xs={12} className={classes.root}>
+            <Typography variant="h6" component="h2" gutterBottom>
+              or
+                       </Typography>
+            <Divider flexItem />
 
-    //       <Grid item xs={12} className={classes.root}>
-    //         <Typography variant="h6" component="h2" gutterBottom>
-    //           or
-    //                    </Typography>
-    //         <Divider flexItem />
+            <CreateAccountModal />
 
-    //         <CreateAccountModal />
-
-    //       </Grid>
-    //     </Paper>
-    //   </Grid>
-    // </div>
+          </Grid>
+        </Paper>
+      </Grid>
+    </div>
   )
 
 }
@@ -184,6 +160,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
 
+    dispatchLoginUsername: (e) => dispatch(handleUsernameDispatch(e)),
+    dispatchLoginPassword: (e) => dispatch(handlePasswordDispatch(e))
 
   }
 }

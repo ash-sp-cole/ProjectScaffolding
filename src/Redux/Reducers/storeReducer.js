@@ -11,9 +11,10 @@ const initialState = {
 
 
 export const storeReducer = (state = initialState, action) => {
-
+    console.log("store value of " + state.usernameLoginDummy + "  " +  state.passwordLoginDummy)
+    
     switch (action.type) {
-        
+     
 
         case USERNAME_LOGIN_DUMMY:
 
