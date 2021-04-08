@@ -55,7 +55,7 @@ const PersonalAppBar = (props, dispatchLoginPassword, dispatchLoginUsername) => 
     event.preventDefault();
     props.dispatchLoginPassword(password);
     props.dispatchLoginUsername(email);
-
+   
   }
 
 
@@ -123,6 +123,14 @@ const PersonalAppBar = (props, dispatchLoginPassword, dispatchLoginUsername) => 
                 <Grid item xs={12} >
                   <Button variant="contained" color="primary" style={{ marginBottom: '1%', marginTop: '10%' }}
                     type="submit" value="Submit"
+                   
+                  >
+                    add to redux store
+                  </Button>
+                  <Button variant="contained" color="primary" style={{ marginBottom: '1%', marginTop: '10%' }}
+                    
+                    component={Link}
+                    to="/rangerHome"
                   >
                     Login
                   </Button>
