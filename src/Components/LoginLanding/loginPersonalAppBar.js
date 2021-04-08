@@ -44,23 +44,40 @@ const PersonalAppBar = (props, dispatchLoginPassword, dispatchLoginUsername) => 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [authBool, setAuthBool] = useState(false);
 
   const classes = useStyles();
   const classesLogin = useStylesLogin();
 
 
+const validationLogin = (data) =>{
 
+  if(data != "") {
+    return true
+  }
+
+}
 
   const handleFormChange = (event) => {
     event.preventDefault();
-    props.dispatchLoginPassword(password);
+    
+   if( validationLogin(email) &&  validationLogin(password)){
     props.dispatchLoginUsername(email);
+    props.dispatchLoginPassword(password);
+    setAuthBool(true);
+
+   }  
+   
+   else { 
+     alert ("please enter valid username and pass word to continue")
+   
+   }
    
   }
 
 
 
-
+if(authBool != true) {
   return (
 
     <div className={classes.root}>
@@ -155,6 +172,51 @@ const PersonalAppBar = (props, dispatchLoginPassword, dispatchLoginUsername) => 
       </Grid>
     </div>
   )
+
+}
+
+else return (
+  <div className={classes.root}>
+      <Grid Container spacing={3}>
+
+        <Grid item xs={12}>
+
+          <Typography variant="h1" component="h3" gutterBottom>
+            Welcome
+             </Typography>
+
+          <Typography variant="h3" component="h3" gutterBottom>
+            {props.usernameDummyProp}
+             </Typography>
+
+          <Typography variant="h6" component="h2" gutterBottom>
+            {newDate}
+          </Typography>
+
+        </Grid>
+
+
+
+         
+  
+
+            <Grid item xs={12}>
+              
+                  <Button variant="contained" color="primary" style={{ marginBottom: '1%', marginTop: '10%' }}
+                    
+                    component={Link}
+                    to="/rangerHome"
+                  >
+                    Ranger Home
+                  </Button>
+              </Grid>
+          
+      
+         
+       
+      </Grid>
+    </div>
+)
 
 }
 

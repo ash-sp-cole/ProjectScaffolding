@@ -10,6 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import { Tooltip } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuAppBar() {
+const MenuAppBar = (props) => {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -65,9 +66,14 @@ export default function MenuAppBar() {
           Gebietsbetreuung
           </Typography>
           </Tooltip>
+          <Typography variant="h6" className={classes.title}
+           
+          >
+           {props.propUsername}
+          </Typography>
           {auth && (
             <div>
-                 
+                
                 <Tooltip title="Account Information">
               <IconButton
                 aria-label="account of current user"
@@ -94,6 +100,7 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
+                
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
@@ -104,3 +111,14 @@ export default function MenuAppBar() {
     </div>
   );
 }
+
+const mapStateToProps = (state) =>{
+
+return {
+  propUsername : state.store.usernameLoginDummy
+}
+
+}
+
+
+export default connect (mapStateToProps) (MenuAppBar)
