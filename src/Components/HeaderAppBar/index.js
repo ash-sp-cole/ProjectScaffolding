@@ -101,8 +101,14 @@ const MenuAppBar = (props) => {
                 onClose={handleClose}
               >
                 
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}
+                  component={Link}
+                  to="/userSettings"
+                >Profile</MenuItem>
+                <MenuItem onClick={handleClose}
+                 component={Link}
+                 to="/userSettings"
+                >My account</MenuItem>
               </Menu>
             </div>
           )}

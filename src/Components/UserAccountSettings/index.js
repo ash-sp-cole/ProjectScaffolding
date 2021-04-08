@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     marginBottom: '1%'
   },
 });
-const PersonalAppBar = (props) => {
+const UserAccountSettings = (props) => {
 
   //npm for date and time
   const now = new Date();
@@ -33,10 +33,10 @@ const PersonalAppBar = (props) => {
       <Grid Container spacing={3}>
         <Grid item xs={12}>
           <Typography variant="h1" component="h3" gutterBottom>
-            Welcome {props.usernameProp}
+           Account Settings
       </Typography>
           <Typography variant="h4" component="h2" gutterBottom>
-            {newDate}
+          {props.usernameProp}
           </Typography>
         </Grid>
         
@@ -60,4 +60,4 @@ const mapStatetoProps = (state) =>{
 }
 
 
-export default  connect(mapStatetoProps)  (PersonalAppBar);
+export default  connect(mapStatetoProps)  (UserAccountSettings);

@@ -142,15 +142,9 @@ if(authBool != true) {
                     type="submit" value="Submit"
                    
                   >
-                    add to redux store
+                   Login
                   </Button>
-                  <Button variant="contained" color="primary" style={{ marginBottom: '1%', marginTop: '10%' }}
-                    
-                    component={Link}
-                    to="/rangerHome"
-                  >
-                    Login
-                  </Button>
+              
                 </Grid>
               </FormControl>
             </Grid>
@@ -181,12 +175,12 @@ else return (
 
         <Grid item xs={12}>
 
-          <Typography variant="h1" component="h3" gutterBottom>
-            Welcome
+          <Typography variant="h2" component="h3" gutterBottom>
+          Gebietsbetreuung
              </Typography>
 
-          <Typography variant="h3" component="h3" gutterBottom>
-            {props.usernameDummyProp}
+          <Typography variant="h5" component="h3" gutterBottom>
+            Login Successful
              </Typography>
 
           <Typography variant="h6" component="h2" gutterBottom>

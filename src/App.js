@@ -7,6 +7,7 @@ import stepTwo from "./Components/FormComponents/stepTwo";
 import stepThree from "./Components/FormComponents/stepThree";
 import MenuAppBar from './Components/HeaderAppBar';
 import LoginLanding from './Components/LoginLanding';
+import UserAccountSettings from './Components/UserAccountSettings';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Switch>
         <Route exact path ="/" component={LoginLanding}/>
         <Route path ="/rangerHome" component={HomeMainDisplay}/>
+        <Route path = "/userSettings" component= {UserAccountSettings}/>
         <Route path = "/step1" component= {stepOne}/>
         <Route path = "/step3" component= {stepTwo}/>
         <Route path = "/step3" component= {stepThree}/>
