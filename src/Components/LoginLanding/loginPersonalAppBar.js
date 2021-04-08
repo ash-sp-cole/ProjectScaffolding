@@ -6,7 +6,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import LockIcon from '@material-ui/icons/Lock';
 import { Link } from 'react-router-dom';
 import CreateAccountModal from "../CreateAccount";
-
+import  {connect} from 'react-redux';
 
 const ordinal = require('date-and-time/plugin/ordinal');
 
@@ -32,7 +32,7 @@ const useStylesLogin = makeStyles((theme) => ({
 
 
 
-const PersonalAppBar = () => {
+const PersonalAppBar = (props) => {
 
   // Date setup for NPM
   const now = new Date();
@@ -43,7 +43,7 @@ const PersonalAppBar = () => {
 
   const classes = useStyles();
   const classesLogin = useStylesLogin();
-
+  console.log(props.usernameDummyProp, "   " , props.passwordDummyProp)
     return (
 
 <div className={classes.root}>
@@ -124,4 +124,19 @@ const PersonalAppBar = () => {
 
 }
 
-export default PersonalAppBar;
+const mapStateToProps = (state) =>{
+  return{
+    usernameDummyProp: state.store.usernameLoginDummy,
+    passwordDummyProp: state.store.passwordLoginDummy
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+    
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalAppBar);
