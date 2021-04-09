@@ -1,14 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-    try {
-        console.log("route for home sucess")
-
-    }
-    catch (err) {
-        console.log("error with route")
-    }
+router.get("/testApi", (req,res) =>{
+res.send("working server get ");
 
 
 })
