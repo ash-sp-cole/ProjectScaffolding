@@ -9,7 +9,7 @@ import CreateAccountModal from "../CreateAccount";
 import { connect } from 'react-redux';
 import { Form, Field } from 'react-final-form'
 import Password from "antd/lib/input/Password";
-import {handlePasswordDispatch, handleUsernameDispatch} from "../../Redux/Actions";
+import {handleLoginAuthBool, handlePasswordDispatch, handleUsernameDispatch} from "../../Redux/Actions";
 
 const ordinal = require('date-and-time/plugin/ordinal');
 
@@ -35,7 +35,7 @@ const useStylesLogin = makeStyles((theme) => ({
 
 
 
-const PersonalAppBar = (props, dispatchLoginPassword, dispatchLoginUsername) => {
+const PersonalAppBar = (props, dispatchLoginPassword, dispatchLoginAuthStatus, dispatchLoginUsername) => {
 
   // Date setup for NPM
   const now = new Date();
@@ -64,12 +64,11 @@ const validationLogin = (data) =>{
    if( validationLogin(email) &&  validationLogin(password)){
     props.dispatchLoginUsername(email);
     props.dispatchLoginPassword(password);
-    setAuthBool(true);
-
+    props.dispatchLoginAuthStatus(true);
    }  
    
    else { 
-     alert ("please enter valid username and pass word to continue")
+     alert ("please enter valid username and password to continue")
    
    }
    
@@ -77,7 +76,7 @@ const validationLogin = (data) =>{
 
 
 
-if(authBool != true) {
+if(props.loginAuthStatus != true) {
   return (
 
     <div className={classes.root}>
@@ -217,7 +216,8 @@ else return (
 const mapStateToProps = (state) => {
   return {
     usernameDummyProp: state.store.usernameLoginDummy,
-    passwordDummyProp: state.store.passwordLoginDummy
+    passwordDummyProp: state.store.passwordLoginDummy,
+    loginAuthStatus: state.store.loginBoolAuth
   }
 }
 
@@ -225,7 +225,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
 
     dispatchLoginUsername: (e) => dispatch(handleUsernameDispatch(e)),
-    dispatchLoginPassword: (e) => dispatch(handlePasswordDispatch(e))
+    dispatchLoginPassword: (e) => dispatch(handlePasswordDispatch(e)),
+    dispatchLoginAuthStatus: (e) => dispatch(handleLoginAuthBool(e))
 
   }
 }

@@ -1,10 +1,10 @@
-import {USERNAME_LOGIN_DUMMY, PASSWORD_LOGIN_DUMMY} from "../Actions";
+import {USERNAME_LOGIN_DUMMY, PASSWORD_LOGIN_DUMMY, LOGIN_AUTH_BOOL} from "../Actions";
 
 
 const initialState = {
 
-    usernameLoginDummy: 'test username dummy',
-    passwordLoginDummy: ' test password dummy',
+    usernameLoginDummy: '',
+    passwordLoginDummy: '',
     loginBoolAuth: false
 
 }
@@ -32,6 +32,13 @@ export const storeReducer = (state = initialState, action) => {
                     passwordLoginDummy: action.payload,
     
                 };
+
+        case LOGIN_AUTH_BOOL:
+
+                return{
+                    ...state,
+                    loginBoolAuth:action.payload
+                }
 
 
         default: return state;

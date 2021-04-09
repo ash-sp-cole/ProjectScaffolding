@@ -11,15 +11,15 @@ import HomeIcon from '@material-ui/icons/Home';
 import { Tooltip } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { handleLoginAuthBool } from "../../Redux/Actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    opacity:0.9,
-    borderRadius:'25px',
-    ':&hover' :{
-      opacity:1
+    opacity: 0.9,
+    borderRadius: '25px',
+    ':&hover': {
+      opacity: 1
     }
 
   },
@@ -49,41 +49,47 @@ const MenuAppBar = (props) => {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    props.dispatchLoginAuthStatus(false);
+    handleClose()
+
+  }
+
   return (
     <div className={classes.root}>
-     
+
       <AppBar position="static" elevation={14}>
         <Toolbar>
-        <Tooltip title="Ranger Home" arrow={true} placement="top">
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" component={Link}
-          to="/"
-          >
-            <HomeIcon/>
-          </IconButton>
+          <Tooltip title="Ranger Home" arrow={true} placement="top">
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" component={Link}
+              to="/"
+            >
+              <HomeIcon />
+            </IconButton>
           </Tooltip>
           <Tooltip title="Welcome" placement="top">
-          <Typography variant="h6" className={classes.title}>
-          Gebietsbetreuung
+            <Typography variant="h6" className={classes.title}>
+              Gebietsbetreuung
           </Typography>
           </Tooltip>
           <Typography variant="h6" className={classes.title}
-           
+
           >
-           {props.propUsername}
+            {props.propUsername}
           </Typography>
           {auth && (
             <div>
-                
-                <Tooltip title="Account Information">
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+
+              <Tooltip title="Account Information">
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
               </Tooltip>
               <Menu
                 id="menu-appbar"
@@ -100,15 +106,17 @@ const MenuAppBar = (props) => {
                 open={open}
                 onClose={handleClose}
               >
-                
+
                 <MenuItem onClick={handleClose}
                   component={Link}
                   to="/userSettings"
                 >Profile</MenuItem>
-                <MenuItem onClick={handleClose}
-                 component={Link}
-                 to="/userSettings"
-                >My account</MenuItem>
+                <MenuItem 
+                onClick={handleLogout}
+
+                  component={Link}
+                  to="/"
+                >Logout</MenuItem>
               </Menu>
             </div>
           )}
@@ -118,13 +126,19 @@ const MenuAppBar = (props) => {
   );
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state) => {
 
-return {
-  propUsername : state.store.usernameLoginDummy
+  return {
+    propUsername: state.store.usernameLoginDummy
+  }
+
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatchLoginAuthStatus: (e) => dispatch(handleLoginAuthBool(e))
+
+  }
+
 }
-
-
-export default connect (mapStateToProps) (MenuAppBar)
+export default connect(mapStateToProps, mapDispatchToProps)(MenuAppBar)
