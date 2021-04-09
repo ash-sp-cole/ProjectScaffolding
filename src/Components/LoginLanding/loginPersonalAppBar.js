@@ -52,6 +52,8 @@ const PersonalAppBar = (props, dispatchLoginPassword, dispatchLoginAuthStatus, d
 
 const validationLogin = (data) =>{
 
+  // testing - update to more robust system
+  
   if(data != "") {
     return true
   }
